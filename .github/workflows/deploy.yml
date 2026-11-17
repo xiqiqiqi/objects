@@ -48,6 +48,24 @@ jobs:
         run: npm ci
         working-directory: .xiqiqi/core
 
+      - name: Validate content
+        run: node scripts/validate-content.mjs
+        working-directory: .xiqiqi/core
+        env:
+          CONTENT_DIR: ${{ github.workspace }}/.xiqiqi/content
+
+      - name: Quality gate
+        run: node scripts/quality-gate.mjs
+        working-directory: .xiqiqi/core
+        env:
+          CONTENT_DIR: ${{ github.workspace }}/.xiqiqi/content
+
+      - name: Quality audit
+        run: node scripts/quality-audit.mjs --json
+        working-directory: .xiqiqi/core
+        env:
+          CONTENT_DIR: ${{ github.workspace }}/.xiqiqi/content
+
       - name: Build site
         run: node scripts/build.mjs --config "$GITHUB_WORKSPACE/site.config.ts" --content "$GITHUB_WORKSPACE/.xiqiqi/content" --out "$GITHUB_WORKSPACE/dist"
         working-directory: .xiqiqi/core

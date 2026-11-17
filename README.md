@@ -8,7 +8,6 @@
 
 - channel: `objects`
 - domain: `objects.xiqiqi.com`
-- accent: `#D99A2B`
 - core: `^0.1.0`
 
 ## 部署
